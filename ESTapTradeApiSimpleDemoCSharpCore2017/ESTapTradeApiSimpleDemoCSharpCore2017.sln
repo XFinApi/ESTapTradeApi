@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ESTapTradeApiSimpleDemoCSharpCore2017", "ESTapTradeApiSimpleDemoCSharpCore2017.csproj", "{165F90C2-48AA-4C1A-9911-E68812A27B4E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{165F90C2-48AA-4C1A-9911-E68812A27B4E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{165F90C2-48AA-4C1A-9911-E68812A27B4E}.Debug|x86.Build.0 = Debug|Any CPU
+		{165F90C2-48AA-4C1A-9911-E68812A27B4E}.Release|x86.ActiveCfg = Release|Any CPU
+		{165F90C2-48AA-4C1A-9911-E68812A27B4E}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {754CFB58-E95A-4137-8EB1-FC684B358817}
+	EndGlobalSection
+EndGlobal
