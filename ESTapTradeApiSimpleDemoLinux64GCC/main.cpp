@@ -19,7 +19,9 @@ public:
 	std::string TradeAddress;
 
 	//账户
-	std::string MarketUserName;
+    std::string MarketAuthCode;
+    std::string TradeAuthCode;
+    std::string MarketUserName;
 	std::string MarketPassword;
 	std::string TradeUserName;
 	std::string TradePassword;
@@ -40,6 +42,8 @@ public:
 		MarketAddress = "123.161.206.213:6161";
 		TradeAddress = "123.161.206.213:6160";
  
+        MarketAuthCode = "B112F916FE7D27BCE7B97EB620206457946CED32E26C1EAC946CED32E26C1EAC946CED32E26C1EAC946CED32E26C1EAC5211AF9FEE541DDE9D6F622F72E25D5DEF7F47AA93A738EF5A51B81D8526AB6A9D19E65B41F59D6A946CED32E26C1EACCAF8D4C61E28E2B1ABD9B8F170E14F8847D3EA0BF4E191F5DCB1B791E63DC196D1576DEAF5EC563CA3E560313C0C3411B45076795F550EB050A62C4F74D5892D2D14892E812723FAC858DEBD8D4AF9410729FB849D5D8D6EA48A1B8DC67E037381A279CE9426070929D5DA085659772E24A6F5EA52CF92A4D403F9E46083F27B19A88AD99812DADA44100324759F9FD1964EBD4F2F0FB50B51CD31C0B02BB437";
+        TradeAuthCode = "67EA896065459BECDFDB924B29CB7DF1946CED32E26C1EAC946CED32E26C1EAC946CED32E26C1EAC946CED32E26C1EAC5211AF9FEE541DDE41BCBAB68D525B0D111A0884D847D57163FF7F329FA574E7946CED32E26C1EAC946CED32E26C1EAC733827B0CE853869ABD9B8F170E14F8847D3EA0BF4E191F5D97B3DFE4CCB1F01842DD2B3EA2F4B20CAD19B8347719B7E20EA1FA7A3D1BFEFF22290F4B5C43E6C520ED5A40EC1D50ACDF342F46A92CCF87AEE6D73542C42EC17818349C7DEDAB0E4DB16977714F873D505029E27B3D57EB92D5BEDA0A710197EB67F94BB1892B30F58A3F211D9C3B3839BE2D73FD08DD776B9188654853DDA57675EBB7D6FBBFC";
 		MarketUserName = "ES";
 		MarketPassword = "123456";
 		TradeUserName = "Q1203070045";//公用测试账户。为了测试准确，请注册使用您自己的账户。
@@ -151,10 +155,10 @@ static void  PrintPositionInfo(const XFinApi::TradeApi::Position &pos)
 
 static void  PrintAccountInfo(const XFinApi::TradeApi::Account &acc)
 {
-	printf("  Balance=%g, Available=%g, CanDraw=%g, Equity=%g, FrozenCommission=%g, FrozenMargin=%g, Commission=%g, AccountIntialMargin=%g, PositionProfit=%g, MarketEquity=%g\n",
-		DEFAULT_FILTER(acc.Balance), DEFAULT_FILTER(acc.Available), DEFAULT_FILTER(acc.CanDraw), DEFAULT_FILTER(acc.Equity),
-		DEFAULT_FILTER(acc.FrozenCommission), DEFAULT_FILTER(acc.FrozenMargin), DEFAULT_FILTER(acc.Commission), DEFAULT_FILTER(acc.AccountIntialMargin),
-		DEFAULT_FILTER(acc.PositionProfit), DEFAULT_FILTER(acc.MarketEquity));
+	printf("  Balance=%g, Available=%g, FrozenCommission=%g, FrozenMargin=%g, Commission=%g, MaintenanceMargin=%g, PositionProfit=%g\n",
+		DEFAULT_FILTER(acc.Balance), DEFAULT_FILTER(acc.Available),
+		DEFAULT_FILTER(acc.FrozenCommission), DEFAULT_FILTER(acc.FrozenMargin), DEFAULT_FILTER(acc.Commission), DEFAULT_FILTER(acc.MaintenanceMargin),
+		DEFAULT_FILTER(acc.PositionProfit));
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -336,6 +340,7 @@ void MarketTest()
 
 	//连接服务器
 	XFinApi::TradeApi::OpenParams openParams;
+    openParams.Configs.insert(std::make_pair(std::string("AuthCode"),Cfg.MarketAuthCode));
 	openParams.HostAddress = Cfg.MarketAddress;
 	openParams.UserID = Cfg.MarketUserName;
 	openParams.Password = Cfg.MarketPassword;
@@ -387,6 +392,7 @@ void TradeTest()
 
 	//连接服务器
 	XFinApi::TradeApi::OpenParams openParams;
+    openParams.Configs.insert(std::make_pair(std::string("AuthCode"),Cfg.TradeAuthCode));
 	openParams.HostAddress = Cfg.TradeAddress;
 	openParams.UserID = Cfg.TradeUserName;
 	openParams.Password = Cfg.TradePassword;

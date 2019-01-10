@@ -16,6 +16,8 @@ public class Main {
 		public String TradeAddress = "123.161.206.213:6160";
 
 		//账户
+        public string MarketAuthCode = "B112F916FE7D27BCE7B97EB620206457946CED32E26C1EAC946CED32E26C1EAC946CED32E26C1EAC946CED32E26C1EAC5211AF9FEE541DDE9D6F622F72E25D5DEF7F47AA93A738EF5A51B81D8526AB6A9D19E65B41F59D6A946CED32E26C1EACCAF8D4C61E28E2B1ABD9B8F170E14F8847D3EA0BF4E191F5DCB1B791E63DC196D1576DEAF5EC563CA3E560313C0C3411B45076795F550EB050A62C4F74D5892D2D14892E812723FAC858DEBD8D4AF9410729FB849D5D8D6EA48A1B8DC67E037381A279CE9426070929D5DA085659772E24A6F5EA52CF92A4D403F9E46083F27B19A88AD99812DADA44100324759F9FD1964EBD4F2F0FB50B51CD31C0B02BB437";
+        public string TradeAuthCode = "67EA896065459BECDFDB924B29CB7DF1946CED32E26C1EAC946CED32E26C1EAC946CED32E26C1EAC946CED32E26C1EAC5211AF9FEE541DDE41BCBAB68D525B0D111A0884D847D57163FF7F329FA574E7946CED32E26C1EAC946CED32E26C1EAC733827B0CE853869ABD9B8F170E14F8847D3EA0BF4E191F5D97B3DFE4CCB1F01842DD2B3EA2F4B20CAD19B8347719B7E20EA1FA7A3D1BFEFF22290F4B5C43E6C520ED5A40EC1D50ACDF342F46A92CCF87AEE6D73542C42EC17818349C7DEDAB0E4DB16977714F873D505029E27B3D57EB92D5BEDA0A710197EB67F94BB1892B30F58A3F211D9C3B3839BE2D73FD08DD776B9188654853DDA57675EBB7D6FBBFC";
 		public String MarketUserName = "ES";
 		public String MarketPassword = "123456";
 		public String TradeUserName = "Q1203070045";//公用测试账户。为了测试准确，请注册使用您自己的账户。
@@ -114,10 +116,10 @@ public class Main {
     }
 
     static void PrintAccountInfo(XFinApi.TradeApi.Account acc) {
-        System.out.println(String.format("  Balance=%g, Available=%g, CanDraw=%g, Equity=%g, FrozenCommission=%g, FrozenMargin=%g, Commission=%g, AccountIntialMargin=%g, PositionProfit=%g, MarketEquity=%g",
-                acc.getBalance(), acc.getAvailable(), acc.getCanDraw(), acc.getEquity(), 
+        System.out.println(String.format("  Balance=%g, Available=%g, FrozenCommission=%g, FrozenMargin=%g, Commission=%g, MaintenanceMargin=%g, PositionProfit=%g",
+                acc.getBalance(), acc.getAvailable(), 
 				acc.getFrozenCommission(), acc.getFrozenMargin(), acc.getCommission(),
-                acc.getAccountIntialMargin(), acc.getPositionProfit(), acc.getMarketEquity()));
+                acc.getMaintenanceMargin(), acc.getPositionProfit()));
     }
 
     //////////////////////////////////////////////////////////////////////////////////
@@ -303,6 +305,9 @@ public class Main {
 
         //连接服务器
         XFinApi.TradeApi.OpenParams openParams = new XFinApi.TradeApi.OpenParams();
+        StdStringMap cfgs = new StdStringMap();
+        cfgs.set("AuthCode", Cfg.MarketAuthCode);
+        openParams.setConfigs(cfgs);
         openParams.setHostAddress(Cfg.MarketAddress);
         openParams.setUserID(Cfg.MarketUserName);
         openParams.setPassword(Cfg.MarketPassword);
@@ -354,6 +359,9 @@ public class Main {
 
         //连接服务器
         XFinApi.TradeApi.OpenParams openParams = new XFinApi.TradeApi.OpenParams();
+        StdStringMap cfgs = new StdStringMap();
+        cfgs.set("AuthCode", Cfg.TradeAuthCode);
+        openParams.setConfigs(cfgs);
         openParams.setHostAddress(Cfg.TradeAddress);
         openParams.setUserID(Cfg.TradeUserName);
         openParams.setPassword(Cfg.TradePassword);
