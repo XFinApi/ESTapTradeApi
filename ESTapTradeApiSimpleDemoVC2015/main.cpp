@@ -89,7 +89,7 @@ public:
 
 		ExchangeID = "ZCE";
 		ProductID = "MA";
-		InstrumentID = "812";
+		InstrumentID = "905";
 	}
 };
 
